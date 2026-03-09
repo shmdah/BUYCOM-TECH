@@ -96,24 +96,24 @@
             .blob-2 { bottom: 0; right: 0; width: 250px; height: 250px; opacity: 0.4; }
         }
 
-        /* --- HONEY CART (FIXED ZEN STYLE) --- */
-        .honey-cart-zen {
+        /* --- HONEY CART (MINIMALIST FIX) --- */
+        .cart-icon-wrapper {
             position: relative;
             display: flex; align-items: center; justify-content: center;
             transition: transform 0.2s;
             cursor: pointer; color: #1e3a8a;
             padding: 4px;
         }
-        .honey-cart-zen:active { transform: scale(0.95); }
+        .cart-icon-wrapper:active { transform: scale(0.95); }
 
         .cart-badge {
-            position: absolute; top: -2px; right: -6px;
+            position: absolute; top: -4px; right: -6px;
             background-color: #f59e0b; color: white;
-            font-size: 10px; font-weight: 700; height: 18px; width: 18px;
+            font-size: 10px; font-weight: 700; height: 16px; width: 16px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             opacity: 0; transform: scale(0);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid #F9F8F6; z-index: 10;
+            z-index: 10;
         }
         .cart-badge.visible { opacity: 1; transform: scale(1); }
         
@@ -204,7 +204,7 @@
 <body class="antialiased flex flex-col min-h-screen pt-8">
 
     <div class="promo-banner">
-        Use code <span class="text-blue-300 font-black px-1 tracking-wider">BUYCOMHP</span> for a FREE Bag + Mouse on the HP 830 G8!
+        Use code <span class="text-blue-300 font-black px-1 tracking-wider">BUYCOMHP</span> at checkout (cart) for a FREE Bag + Mouse on the HP 830 G8!
     </div>
 
     <div id="toast">
@@ -233,11 +233,9 @@
             </div>
 
             <div class="flex items-center gap-4 text-stone-800">
-                <div class="relative cursor-pointer group" onclick="openCart()">
-                    <div class="honey-cart-zen" id="cart-icon">
-                        <i class="fas fa-shopping-cart text-xl md:text-2xl text-blue-950"></i>
-                        <div id="cart-badge" class="cart-badge">0</div>
-                    </div>
+                <div class="relative cursor-pointer group cart-icon-wrapper" id="cart-icon" onclick="openCart()">
+                    <i class="fas fa-shopping-cart text-xl md:text-2xl text-blue-950"></i>
+                    <div id="cart-badge" class="cart-badge">0</div>
                 </div>
             </div>
         </div>
@@ -253,6 +251,13 @@
             <button onclick="navigateFromMenu('catalog')" class="hover:text-blue-600 text-left w-full transition-colors border-b border-black/5 pb-2">Shop All</button>
             <button onclick="navigateFromMenu('contact-page')" class="hover:text-blue-600 text-left w-full transition-colors border-b border-black/5 pb-2">Contact</button>
             <button onclick="openCart(); toggleMobileMenu();" class="text-blue-600 text-left w-full font-bold">My Cart</button>
+        </div>
+
+        <div class="mt-auto flex flex-col items-center gap-5 w-full border-t border-black/5 pt-6">
+            <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-2xl text-blue-900/40 hover:text-blue-600 transition-colors">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <button onclick="toggleMobileMenu()" class="text-[10px] text-stone-500 border border-gray-200 px-6 py-2 rounded-full font-bold w-full text-center active:bg-gray-100">CLOSE</button>
         </div>
     </div>
 
@@ -301,10 +306,9 @@
                 </div>
             </div>
             
-            <div class="w-full flex justify-center py-6 mt-auto">
-                <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                    <span class="font-sans text-[9px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
-                    <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
+            <div class="w-full flex justify-center py-6 mt-auto hidden md:flex">
+                <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-xl text-blue-900/40 hover:text-blue-600 transition-colors">
+                    <i class="fab fa-tiktok"></i>
                 </a>
             </div>
         </section>
@@ -345,10 +349,9 @@
                         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 mb-8" id="grid-container">
                             </div>
                         
-                        <div class="w-full flex justify-center py-4 mt-auto">
-                            <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                                <span class="font-sans text-[9px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
-                                <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="w-full flex justify-center py-4 mt-auto hidden md:flex">
+                            <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-xl text-blue-900/40 hover:text-blue-600 transition-colors">
+                                <i class="fab fa-tiktok"></i>
                             </a>
                         </div>
                     </div>
@@ -399,9 +402,12 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row gap-2.5 mb-4">
-                            <button onclick="addToCart()" class="flex-1 bg-white text-blue-950 hover:bg-blue-50 font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-widest border border-blue-900/10 shadow-sm">
+                        <div class="flex flex-col gap-3 mb-4">
+                            <button onclick="addToCart()" class="w-full bg-white text-blue-950 hover:bg-blue-50 font-bold py-3 md:py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-widest border border-blue-900/10 shadow-sm">
                                 🛒 Add to Bag
+                            </button>
+                            <button onclick="buyNow()" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 md:py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-widest shadow-sm">
+                                <i class="fab fa-whatsapp text-sm md:text-base"></i> Order via WhatsApp
                             </button>
                         </div>
                     </div>
@@ -412,10 +418,9 @@
                     <table class="w-full text-left font-sans text-xs text-blue-900" id="specs-table"></table>
                 </div>
                 
-                <div class="w-full flex justify-center py-4 mt-auto">
-                    <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 transition-opacity hover:opacity-100 opacity-70">
-                        <span class="font-sans text-[9px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
-                        <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
+                <div class="w-full flex justify-center py-4 mt-auto hidden md:flex">
+                    <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-xl text-blue-900/40 hover:text-blue-600 transition-colors">
+                        <i class="fab fa-tiktok"></i>
                     </a>
                 </div>
             </div>
@@ -457,13 +462,6 @@
                             Checkout via WhatsApp <i class="fab fa-whatsapp text-lg"></i>
                         </button>
                         
-                        <div class="w-full flex justify-center pt-6 mt-2">
-                            <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 opacity-70 transition-opacity hover:opacity-100">
-                                <span class="font-sans text-[10px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
-                                <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
-                            </a>
-                        </div>
-                        
                         <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="w-full bg-black hover:bg-gray-900 text-white py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-sm uppercase tracking-widest text-[9px] md:text-[10px] mt-4 active:scale-95">
                             <i class="fab fa-tiktok text-sm"></i> Follow on TikTok
                         </a>
@@ -504,10 +502,9 @@
                     </div>
                 </div>
                 
-                <div class="w-full flex justify-center py-6 mt-auto">
-                    <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 transition-opacity hover:opacity-100 opacity-70">
-                        <span class="font-sans text-[9px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
-                        <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
+                <div class="w-full flex justify-center py-6 mt-auto hidden md:flex">
+                    <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-xl text-blue-900/40 hover:text-blue-600 transition-colors">
+                        <i class="fab fa-tiktok"></i>
                     </a>
                 </div>
             </div>
@@ -679,7 +676,7 @@
                                 🛒 Add to Bag
                             </button>
                             <button onclick="event.stopPropagation(); selectProduct(${index})" class="flex-1 bg-blue-50 text-blue-700 hover:bg-blue-100 font-sans font-bold py-2.5 rounded-lg transition-colors text-[9px] md:text-[10px] border border-blue-100 flex justify-center items-center gap-1">
-                                🔍 View Item
+                                🔍 View
                             </button>
                         </div>
                     </div>`; 
@@ -943,9 +940,9 @@
                                     ${extraTags}
 
                                     <div class="flex items-center gap-1.5 md:gap-3 bg-[#F9F8F6] w-fit rounded-lg px-2 py-1 mt-2 border border-blue-900/5">
-                                        <button onclick="updateCartQty(${item.cartId}, -1)" class="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-minus text-[7px] md:text-[10px]"></i></button>
+                                        <button onclick="updateCartQty(${item.cartId}, -1)" class="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-minus text-[7px] md:text-[10px]"></i></button>
                                         <span class="text-[9px] md:text-xs font-bold w-3 md:w-4 text-center text-blue-900 font-sans">${item.qty}</span>
-                                        <button onclick="updateCartQty(${item.cartId}, 1)" class="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-plus text-[7px] md:text-[10px]"></i></button>
+                                        <button onclick="updateCartQty(${item.cartId}, 1)" class="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-plus text-[7px] md:text-[10px]"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -960,6 +957,15 @@
         }
 
         function openCart() { showPage('cart-page'); }
+
+        function buyNow() { 
+            const p = currentSelection.product; 
+            let msg = '💻 *BUYCOM TECH: QUICK ORDER*\n\n';
+            msg += `*Device:* ${p.name}\n*Specs:* ${currentSelection.ram} | ${currentSelection.storage}\n`; 
+            if (p.promo) msg += `*Promo:* 🎁 ${p.promo}\n`;
+            msg += `*Price:* KSh ${currentSelection.finalPrice.toLocaleString()}`; 
+            window.open('https://wa.me/254799236373?text=' + encodeURIComponent(msg), '_blank'); 
+        }
 
         function checkoutCart() { 
             if(cart.length === 0) return showToast("Cart is empty!"); 
