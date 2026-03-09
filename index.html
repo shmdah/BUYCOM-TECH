@@ -56,12 +56,11 @@
         ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
         .hide-scroll::-webkit-scrollbar { display: none; }
 
-        /* --- PROMO BANNER --- */
+        /* --- PROMO BANNER (MOVING BELT) --- */
         .promo-banner {
             background-color: #172554; 
             color: white;
-            text-align: center;
-            padding: 6px;
+            padding: 6px 0;
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 1px;
@@ -69,6 +68,18 @@
             top: 0;
             width: 100%;
             z-index: 2000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        .promo-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
         }
 
         /* Adjust Nav for Promo Banner */
@@ -96,7 +107,7 @@
             .blob-2 { bottom: 0; right: 0; width: 250px; height: 250px; opacity: 0.4; }
         }
 
-        /* --- HONEY CART (MINIMALIST FIX) --- */
+        /* --- HONEY CART --- */
         .cart-icon-wrapper {
             position: relative;
             display: flex; align-items: center; justify-content: center;
@@ -107,13 +118,13 @@
         .cart-icon-wrapper:active { transform: scale(0.95); }
 
         .cart-badge {
-            position: absolute; top: -4px; right: -6px;
+            position: absolute; top: -2px; right: -6px;
             background-color: #f59e0b; color: white;
-            font-size: 10px; font-weight: 700; height: 16px; width: 16px;
+            font-size: 10px; font-weight: 700; height: 18px; width: 18px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             opacity: 0; transform: scale(0);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 10;
+            border: 2px solid #F9F8F6; z-index: 10;
         }
         .cart-badge.visible { opacity: 1; transform: scale(1); }
         
@@ -136,25 +147,6 @@
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             filter: drop-shadow(0 10px 15px rgba(29, 78, 216, 0.15));
         }
-
-        /* --- BUTTONS --- */
-        .btn-zen {
-            background: #1e3a8a; color: #fff;
-            padding: 12px 24px; border-radius: 30px; font-size: 14px;
-            font-weight: 400; transition: background 0.3s;
-            width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn-zen:active { background: #1e40af; }
-
-        /* --- CART DRAWER --- */
-        #cart-drawer { 
-            background: #fff; 
-            box-shadow: -10px 0 40px rgba(29, 78, 216, 0.1);
-            transition: transform 0.3s ease-in-out;
-            will-change: transform; 
-        }
-        .cart-open { transform: translateX(0%); }
-        .cart-closed { transform: translateX(100%); }
 
         /* --- VIEWS --- */
         nav { height: 60px; padding-top: max(10px, env(safe-area-inset-top)); z-index: 100; transition: background-color 0.3s, box-shadow 0.3s; }
@@ -204,7 +196,9 @@
 <body class="antialiased flex flex-col min-h-screen pt-8">
 
     <div class="promo-banner">
-        Use code <span class="text-blue-300 font-black px-1 tracking-wider">BUYCOMHP</span> at checkout (cart) for a FREE Bag + Mouse on the HP 830 G8!
+        <div class="promo-marquee">
+            Use code <span class="text-blue-300 font-black px-1 tracking-wider">BUYCOMHP</span> at checkout (cart) for a FREE Bag + Mouse on the HP 830 G8!
+        </div>
     </div>
 
     <div id="toast">
@@ -230,6 +224,9 @@
                 <button onclick="showPage('home')" class="hover:text-blue-500 transition cursor-pointer">Home</button>
                 <button onclick="showPage('catalog')" class="hover:text-blue-500 transition cursor-pointer">Shop</button>
                 <button onclick="showPage('contact-page')" class="hover:text-blue-500 transition cursor-pointer">Contact</button>
+                <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="hover:text-blue-500 transition cursor-pointer text-lg ml-2">
+                    <i class="fab fa-tiktok"></i>
+                </a>
             </div>
 
             <div class="flex items-center gap-4 text-stone-800">
@@ -250,11 +247,11 @@
             <button onclick="navigateFromMenu('home')" class="hover:text-blue-600 text-left w-full transition-colors border-b border-black/5 pb-2">Home</button>
             <button onclick="navigateFromMenu('catalog')" class="hover:text-blue-600 text-left w-full transition-colors border-b border-black/5 pb-2">Shop All</button>
             <button onclick="navigateFromMenu('contact-page')" class="hover:text-blue-600 text-left w-full transition-colors border-b border-black/5 pb-2">Contact</button>
-            <button onclick="openCart(); toggleMobileMenu();" class="text-blue-600 text-left w-full font-bold">My Cart</button>
+            <button onclick="openCart(); toggleMobileMenu();" class="text-blue-600 text-left w-full font-bold border-b border-black/5 pb-2">My Cart</button>
         </div>
 
-        <div class="mt-auto flex flex-col items-center gap-5 w-full border-t border-black/5 pt-6">
-            <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-2xl text-blue-900/40 hover:text-blue-600 transition-colors">
+        <div class="mt-auto flex flex-col items-center gap-5 w-full pt-6">
+            <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-2xl text-blue-900/50 hover:text-blue-600 transition-colors">
                 <i class="fab fa-tiktok"></i>
             </a>
             <button onclick="toggleMobileMenu()" class="text-[10px] text-stone-500 border border-gray-200 px-6 py-2 rounded-full font-bold w-full text-center active:bg-gray-100">CLOSE</button>
@@ -306,9 +303,10 @@
                 </div>
             </div>
             
-            <div class="w-full flex justify-center py-6 mt-auto hidden md:flex">
-                <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-xl text-blue-900/40 hover:text-blue-600 transition-colors">
-                    <i class="fab fa-tiktok"></i>
+            <div class="w-full flex justify-center py-6 mt-auto">
+                <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                    <span class="font-sans text-[9px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
+                    <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
                 </a>
             </div>
         </section>
@@ -349,9 +347,10 @@
                         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 mb-8" id="grid-container">
                             </div>
                         
-                        <div class="w-full flex justify-center py-4 mt-auto hidden md:flex">
-                            <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-xl text-blue-900/40 hover:text-blue-600 transition-colors">
-                                <i class="fab fa-tiktok"></i>
+                        <div class="w-full flex justify-center py-4 mt-auto">
+                            <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                                <span class="font-sans text-[9px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
+                                <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
                             </a>
                         </div>
                     </div>
@@ -402,11 +401,11 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-col gap-3 mb-4">
-                            <button onclick="addToCart()" class="w-full bg-white text-blue-950 hover:bg-blue-50 font-bold py-3 md:py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-widest border border-blue-900/10 shadow-sm">
+                        <div class="flex flex-col sm:flex-row gap-2.5 mb-4">
+                            <button onclick="addToCart()" class="flex-1 bg-white text-blue-950 hover:bg-blue-50 font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-widest border border-blue-900/10 shadow-sm">
                                 🛒 Add to Bag
                             </button>
-                            <button onclick="buyNow()" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 md:py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-widest shadow-sm">
+                            <button onclick="buyNow()" class="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-95 text-[10px] md:text-xs uppercase tracking-widest shadow-sm">
                                 <i class="fab fa-whatsapp text-sm md:text-base"></i> Order via WhatsApp
                             </button>
                         </div>
@@ -418,9 +417,10 @@
                     <table class="w-full text-left font-sans text-xs text-blue-900" id="specs-table"></table>
                 </div>
                 
-                <div class="w-full flex justify-center py-4 mt-auto hidden md:flex">
-                    <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-xl text-blue-900/40 hover:text-blue-600 transition-colors">
-                        <i class="fab fa-tiktok"></i>
+                <div class="w-full flex justify-center py-4 mt-auto">
+                    <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 transition-opacity hover:opacity-100 opacity-70">
+                        <span class="font-sans text-[9px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
+                        <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
                     </a>
                 </div>
             </div>
@@ -462,9 +462,18 @@
                             Checkout via WhatsApp <i class="fab fa-whatsapp text-lg"></i>
                         </button>
                         
-                        <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="w-full bg-black hover:bg-gray-900 text-white py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-sm uppercase tracking-widest text-[9px] md:text-[10px] mt-4 active:scale-95">
-                            <i class="fab fa-tiktok text-sm"></i> Follow on TikTok
-                        </a>
+                        <div class="w-full flex justify-center pt-6 mt-2">
+                            <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 opacity-70 transition-opacity hover:opacity-100">
+                                <span class="font-sans text-[10px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
+                                <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
+                            </a>
+                        </div>
+                        
+                        <div class="md:hidden w-full flex justify-center mt-4">
+                            <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-2xl text-blue-900/40 hover:text-blue-600 transition-colors">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                        </div>
 
                     </div>
                 </div>
@@ -472,39 +481,40 @@
         </section>
 
         <section id="contact-page" class="page bg-transparent">
-            <div class="max-w-7xl mx-auto w-full px-4 md:px-8 py-8 flex flex-col h-full items-center justify-center relative">
+            <div class="max-w-7xl mx-auto w-full px-5 md:px-8 py-6 md:py-8 flex flex-col h-full items-center justify-center relative">
                 <button onclick="showPage('home')" class="absolute top-4 left-4 md:top-8 md:left-8 text-blue-700 hover:text-blue-950 font-bold text-[10px] md:text-xs uppercase tracking-widest flex items-center gap-1.5 transition w-fit">
                     <i class="fas fa-arrow-left"></i> Home
                 </button>
 
-                <div class="bg-white p-6 md:p-10 rounded-[24px] w-full max-w-sm shadow-xl border border-blue-900/5 text-center mt-8">
-                    <div class="w-14 h-14 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center mx-auto mb-5 border border-blue-100">
-                        <i class="fas fa-map-marker-alt text-xl"></i>
+                <div class="bg-white p-5 md:p-10 rounded-[20px] md:rounded-[24px] w-full max-w-sm shadow-xl border border-blue-900/5 text-center mt-6 md:mt-8">
+                    <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center mx-auto mb-4 md:mb-5 border border-blue-100 text-lg md:text-xl">
+                        <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <h2 class="text-2xl font-display font-bold mb-1 text-blue-950">BUYCOM TECH</h2>
-                    <p class="text-blue-500 text-[10px] uppercase tracking-widest mb-6 font-bold">Nairobi, Kenya</p>
+                    <h2 class="text-xl md:text-2xl font-display font-bold mb-1 text-blue-950">BUYCOM TECH</h2>
+                    <p class="text-blue-500 text-[10px] uppercase tracking-widest mb-4 md:mb-6 font-bold">Nairobi, Kenya</p>
                     
-                    <div class="bg-[#F9F8F6] rounded-xl p-4 mb-6 text-left flex items-start gap-3 border border-blue-900/5">
-                        <i class="fas fa-location-dot text-blue-400 mt-1 text-xs"></i>
-                        <div class="text-xs text-blue-900 leading-relaxed font-sans">
-                            <span class="font-bold block text-blue-950 text-sm mb-0.5">Mithoo Biashara Center</span>
+                    <div class="bg-[#F9F8F6] rounded-xl p-3 md:p-4 mb-4 md:mb-6 text-left flex items-start gap-3 border border-blue-900/5">
+                        <i class="fas fa-location-dot text-blue-400 mt-1 text-[10px] md:text-xs"></i>
+                        <div class="text-[11px] md:text-xs text-blue-900 leading-relaxed font-sans">
+                            <span class="font-bold block text-blue-950 text-xs md:text-sm mb-0.5">Mithoo Biashara Center</span>
                             Basement (B38/B39)
                         </div>
                     </div>
                     
-                    <div class="flex flex-col gap-2.5">
-                        <a href="tel:0799236373" class="w-full bg-white border border-blue-200 text-blue-950 py-3 rounded-xl font-bold text-[10px] active:scale-95 transition-transform flex items-center justify-center gap-2 uppercase tracking-widest hover:bg-blue-50">
+                    <div class="flex flex-col gap-2 md:gap-2.5">
+                        <a href="tel:0799236373" class="w-full bg-white border border-blue-200 text-blue-950 py-2.5 md:py-3 rounded-xl font-bold text-[10px] active:scale-95 transition-transform flex items-center justify-center gap-2 uppercase tracking-widest hover:bg-blue-50">
                             <i class="fas fa-phone"></i> Call Us
                         </a>
-                        <a href="https://wa.me/254799236373" target="_blank" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-[0_4px_15px_rgba(37,211,102,0.3)] py-3 rounded-xl font-bold text-[10px] active:scale-95 transition-transform flex items-center justify-center gap-2 uppercase tracking-widest">
+                        <a href="https://wa.me/254799236373" target="_blank" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-[0_4px_15px_rgba(37,211,102,0.3)] py-2.5 md:py-3 rounded-xl font-bold text-[10px] active:scale-95 transition-transform flex items-center justify-center gap-2 uppercase tracking-widest">
                             <i class="fab fa-whatsapp text-sm"></i> Message Us
                         </a>
                     </div>
                 </div>
                 
-                <div class="w-full flex justify-center py-6 mt-auto hidden md:flex">
-                    <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="text-xl text-blue-900/40 hover:text-blue-600 transition-colors">
-                        <i class="fab fa-tiktok"></i>
+                <div class="w-full flex justify-center py-6 mt-auto">
+                    <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 transition-opacity hover:opacity-100 opacity-70">
+                        <span class="font-sans text-[9px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
+                        <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
                     </a>
                 </div>
             </div>
@@ -519,7 +529,7 @@
         }
         window.addEventListener('scroll', updateNavBackground);
 
-        // --- LOCAL DATABASE (LAPTOPS WITH DUAL CONFIG OPTIONS) ---
+        // --- LOCAL DATABASE ---
         const products = [
             { 
                 id: 'mac1', name: 'MacBook Pro M3 Max', basePrice: 450000, type: 'MacBook', brand: 'Apple',
@@ -561,7 +571,7 @@
 
         let currentSelection = { product: null, ram: '', storage: '', ramPrice: 0, storagePrice: 0, finalPrice: 0 };
         let activeCategoryFilter = 'all';
-        let cart = JSON.parse(localStorage.getItem('buycom_cart_zen_v5')) || [];
+        let cart = JSON.parse(localStorage.getItem('buycom_cart_zen_v6')) || [];
         let activePromo = false;
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -675,8 +685,8 @@
                             <button onclick="event.stopPropagation(); quickAddToCart('${p.id}')" class="flex-1 bg-[#F9F8F6] text-blue-900 hover:bg-blue-50 font-sans font-bold py-2.5 rounded-lg transition-colors text-[9px] md:text-[10px] border border-blue-900/5 flex justify-center items-center gap-1">
                                 🛒 Add to Bag
                             </button>
-                            <button onclick="event.stopPropagation(); selectProduct(${index})" class="flex-1 bg-blue-50 text-blue-700 hover:bg-blue-100 font-sans font-bold py-2.5 rounded-lg transition-colors text-[9px] md:text-[10px] border border-blue-100 flex justify-center items-center gap-1">
-                                🔍 View
+                            <button onclick="event.stopPropagation(); quickBuyNow('${p.id}')" class="flex-1 bg-[#25D366] hover:bg-[#20bd5a] text-white font-sans font-bold py-2.5 rounded-lg transition-colors text-[9px] md:text-[10px] shadow-sm flex justify-center items-center gap-1">
+                                <i class="fab fa-whatsapp"></i> Order
                             </button>
                         </div>
                     </div>`; 
@@ -813,7 +823,7 @@
                 cart.push(item); 
             }
             
-            localStorage.setItem('buycom_cart_zen_v5', JSON.stringify(cart)); 
+            localStorage.setItem('buycom_cart_zen_v6', JSON.stringify(cart)); 
             updateCartUI(); 
             showToast("Added to Bag"); 
             
@@ -830,7 +840,7 @@
             if (item.qty <= 0) {
                 cart = cart.filter(i => i.cartId !== cartId);
             }
-            localStorage.setItem('buycom_cart_zen_v5', JSON.stringify(cart)); 
+            localStorage.setItem('buycom_cart_zen_v6', JSON.stringify(cart)); 
             updateCartUI(); 
         }
 
@@ -846,14 +856,14 @@
                 if(promoInput) promoInput.value = '';
             }
             
-            localStorage.setItem('buycom_cart_zen_v5', JSON.stringify(cart)); 
+            localStorage.setItem('buycom_cart_zen_v6', JSON.stringify(cart)); 
             updateCartUI(); 
         }
 
         function clearCart() { 
             if(confirm("Clear all items from your bag?")) { 
                 cart = []; 
-                localStorage.setItem('buycom_cart_zen_v5', JSON.stringify(cart)); 
+                localStorage.setItem('buycom_cart_zen_v6', JSON.stringify(cart)); 
                 updateCartUI(); 
             } 
         }
@@ -940,14 +950,15 @@
                                     ${extraTags}
 
                                     <div class="flex items-center gap-1.5 md:gap-3 bg-[#F9F8F6] w-fit rounded-lg px-2 py-1 mt-2 border border-blue-900/5">
-                                        <button onclick="updateCartQty(${item.cartId}, -1)" class="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-minus text-[7px] md:text-[10px]"></i></button>
+                                        <button onclick="updateCartQty(${item.cartId}, -1)" class="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-minus text-[7px] md:text-[10px]"></i></button>
                                         <span class="text-[9px] md:text-xs font-bold w-3 md:w-4 text-center text-blue-900 font-sans">${item.qty}</span>
-                                        <button onclick="updateCartQty(${item.cartId}, 1)" class="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-plus text-[7px] md:text-[10px]"></i></button>
+                                        <button onclick="updateCartQty(${item.cartId}, 1)" class="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-plus text-[7px] md:text-[10px]"></i></button>
                                     </div>
                                 </div>
                             </div>
-                            <button onclick="removeFromCart(${item.cartId}); event.stopPropagation();" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-100 transition-colors z-20 cursor-pointer">
-                                <i class="fas fa-times text-[10px]"></i>
+                            
+                            <button onclick="removeFromCart(${item.cartId}); event.stopPropagation();" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-100 transition-colors z-20 cursor-pointer shadow-sm border border-red-100">
+                                <i class="fas fa-times text-xs"></i>
                             </button>
                         </div>`; 
                     }); 
@@ -957,6 +968,16 @@
         }
 
         function openCart() { showPage('cart-page'); }
+
+        function quickBuyNow(id) {
+            const p = products.find(prod => prod.id === id);
+            const defaultSize = `${p.ramOptions[0].size} | ${p.storageOptions[0].size}`;
+            let msg = '💻 *BUYCOM TECH: QUICK ORDER*\n\n';
+            msg += `*Device:* ${p.name}\n*Specs:* ${defaultSize}\n`; 
+            if (p.promo) msg += `*Promo:* 🎁 ${p.promo}\n`;
+            msg += `*Price:* KSh ${p.basePrice.toLocaleString()}`; 
+            window.open('https://wa.me/254799236373?text=' + encodeURIComponent(msg), '_blank'); 
+        }
 
         function buyNow() { 
             const p = currentSelection.product; 
