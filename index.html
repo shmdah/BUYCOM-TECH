@@ -99,25 +99,21 @@
         /* --- HONEY CART (FIXED ZEN STYLE) --- */
         .honey-cart-zen {
             position: relative;
-            width: 40px; height: 40px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
             transition: transform 0.2s;
-            cursor: pointer; color: white;
-            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer; color: #1e3a8a;
+            padding: 4px;
         }
         .honey-cart-zen:active { transform: scale(0.95); }
 
         .cart-badge {
-            position: absolute; top: -5px; right: -5px;
+            position: absolute; top: -2px; right: -6px;
             background-color: #f59e0b; color: white;
             font-size: 10px; font-weight: 700; height: 18px; width: 18px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             opacity: 0; transform: scale(0);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid #fff; z-index: 10;
+            border: 2px solid #F9F8F6; z-index: 10;
         }
         .cart-badge.visible { opacity: 1; transform: scale(1); }
         
@@ -200,8 +196,7 @@
         /* --- FORMS & INPUTS --- */
         input[type="text"], select { background: #FFFFFF; border: 1px solid rgba(29,78,216,0.15); color: #1e3a8a; outline: none; font-family: 'Lato', sans-serif; }
         input[type="text"]:focus, select:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
-        select.loc-select { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3a8a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; }
-
+        
         /* PILLS */
         .cat-pill { white-space: nowrap; padding: 6px 16px; border-radius: 99px; font-size: 11px; font-weight: 700; border: 1px solid rgba(0,0,0,0.05); transition: all 0.2s; cursor: pointer; background: white; font-family: 'Lato', sans-serif; }
     </style>
@@ -240,7 +235,7 @@
             <div class="flex items-center gap-4 text-stone-800">
                 <div class="relative cursor-pointer group" onclick="openCart()">
                     <div class="honey-cart-zen" id="cart-icon">
-                        <i class="fas fa-shopping-cart text-sm"></i>
+                        <i class="fas fa-shopping-cart text-xl md:text-2xl text-blue-950"></i>
                         <div id="cart-badge" class="cart-badge">0</div>
                     </div>
                 </div>
@@ -300,7 +295,7 @@
                             <h3 class="text-lg md:text-xl font-display font-bold text-blue-950 mb-1 leading-tight">Dell<br>XPS</h3>
                             <span class="text-[9px] md:text-[10px] font-bold text-blue-600 mt-1 flex items-center gap-1 opacity-80 group-hover:opacity-100 transition">Explore <i class="fas fa-arrow-right text-[8px]"></i></span>
                         </div>
-                        <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=500&q=80" class="melon-img">
+                        <img src="images/DELL XP 13 (3).png" class="melon-img">
                     </div>
 
                 </div>
@@ -443,35 +438,36 @@
                         <div id="cart-items-container" class="space-y-3"></div>
                     </div>
 
-                    <div class="w-full lg:w-[340px] bg-white border border-blue-900/5 shadow-xl p-5 md:p-6 rounded-2xl lg:sticky top-[90px] order-2">
+                    <div class="w-full lg:w-[380px] bg-white border border-blue-900/5 shadow-[0_10px_40px_rgba(29,78,216,0.05)] p-6 md:p-8 rounded-3xl lg:sticky top-[100px] order-2">
                         
-                        <div class="mb-5">
-                            <label class="block text-[9px] font-bold text-blue-700 uppercase tracking-widest mb-2">Delivery Area <span class="text-blue-500">*</span></label>
-                            <select id="delivery-location" class="loc-select w-full bg-[#F9F8F6] border border-blue-900/10 text-blue-950 text-xs rounded-lg px-3 py-2.5 focus:border-blue-500 transition-colors cursor-pointer font-sans">
-                                <option value="" disabled selected>Select drop-off point...</option>
-                                <option value="Qwetu">Qwetu</option>
-                                <option value="KU">KU</option>
-                                <option value="KenGen">KenGen</option>
-                                <option value="Rainbow Plaza">Rainbow Plaza</option>
-                                <option value="Ngara Hostel">Ngara Hostel</option>
-                            </select>
+                        <div class="mb-4">
+                            <div class="flex gap-2">
+                                <input type="text" id="promo-code-input" placeholder="Enter Promo Code" class="flex-1 border border-blue-900/10 rounded-lg px-4 py-3 text-xs outline-none focus:border-blue-500 bg-white font-sans uppercase shadow-sm">
+                                <button onclick="applyPromoCode()" class="bg-blue-950 text-white px-5 py-3 rounded-lg text-xs font-bold shadow-sm hover:bg-blue-800 transition">Apply</button>
+                            </div>
+                            <p id="promo-msg" class="text-[10px] font-bold mt-2 hidden transition-all"></p>
                         </div>
 
-                        <div class="flex justify-between items-end mb-6 border-t border-blue-900/10 pt-5">
-                            <span class="text-[10px] font-bold text-blue-700 uppercase tracking-widest">Total</span>
-                            <span id="cart-total" class="text-xl md:text-2xl font-bold text-blue-950 font-sans">KSh 0</span>
+                        <div class="flex justify-between items-center mb-6 border-t border-blue-900/10 pt-5">
+                            <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Total</span>
+                            <span id="cart-total" class="text-2xl md:text-3xl font-bold text-blue-950 font-sans">KSh 0</span>
                         </div>
 
-                        <button onclick="checkoutCart()" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(37,211,102,0.3)] uppercase tracking-widest text-[10px] md:text-xs active:scale-95">
-                            Checkout via WhatsApp <i class="fab fa-whatsapp text-base"></i>
+                        <button onclick="checkoutCart()" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(37,211,102,0.3)] uppercase tracking-wider text-[10px] md:text-xs active:scale-95">
+                            Checkout via WhatsApp <i class="fab fa-whatsapp text-lg"></i>
                         </button>
                         
-                        <div class="wc-brand-footer pt-5 mt-3 pb-0">
-                            <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 transition-opacity hover:opacity-100 opacity-70">
-                                <span class="wc-brand-text m-0 text-blue-800">POWERED BY</span>
-                                <div class="wc-brand-icon"><i class="fas fa-shopping-cart text-white"></i></div>
+                        <div class="w-full flex justify-center pt-6 mt-2">
+                            <a href="https://www.whats-cart.com/" target="_blank" class="flex flex-row items-center justify-center gap-2 opacity-70 transition-opacity hover:opacity-100">
+                                <span class="font-sans text-[10px] text-blue-800 uppercase tracking-[0.2em] font-bold">POWERED BY</span>
+                                <div class="w-5 h-5 bg-gradient-to-br from-[#22c55e] to-[#15803d] rounded flex items-center justify-center text-white text-[9px] shadow-sm"><i class="fas fa-shopping-cart"></i></div>
                             </a>
                         </div>
+                        
+                        <a href="https://www.tiktok.com/@buycom.technologies" target="_blank" class="w-full bg-black hover:bg-gray-900 text-white py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-sm uppercase tracking-widest text-[9px] md:text-[10px] mt-4 active:scale-95">
+                            <i class="fab fa-tiktok text-sm"></i> Follow on TikTok
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -557,8 +553,8 @@
             },
             { 
                 id: 'dell1', name: 'Dell XPS 13 Plus', basePrice: 240000, type: 'Dell', brand: 'Dell',
-                image: 'https://images.unsplash.com/photo-1593642702821-c823b2816298?auto=format&fit=crop&w=600&q=80', 
-                images: ['https://images.unsplash.com/photo-1593642702821-c823b2816298?auto=format&fit=crop&w=600&q=80', 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=600&q=80'],
+                image: 'images/DELL XP 13 (3).png', 
+                images: ['images/DELL XP 13 (3).png'],
                 description: "Futuristic design. Invisible trackpad, zero-lattice keyboard, and edge-to-edge display.", 
                 ramOptions: [{size: '8GB', priceAdd: 0}, {size: '16GB', priceAdd: 20000}, {size: '32GB', priceAdd: 45000}],
                 storageOptions: [{size: '512GB', priceAdd: 0}, {size: '1TB', priceAdd: 30000}, {size: '2TB', priceAdd: 75000}],
@@ -568,7 +564,7 @@
 
         let currentSelection = { product: null, ram: '', storage: '', ramPrice: 0, storagePrice: 0, finalPrice: 0 };
         let activeCategoryFilter = 'all';
-        let cart = JSON.parse(localStorage.getItem('buycom_cart_zen_v4')) || [];
+        let cart = JSON.parse(localStorage.getItem('buycom_cart_zen_v5')) || [];
         let activePromo = false;
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -669,20 +665,21 @@
                 container.innerHTML += `
                     <div class="bg-white border border-blue-900/5 rounded-2xl p-3 transition hover:-translate-y-1 hover:shadow-xl hover:border-blue-900/10 cursor-pointer group flex flex-col" onclick="selectProduct(${index})">
                         ${promoBadge}
-                        <div class="w-full h-20 md:h-32 bg-[#F9F8F6] rounded-xl flex justify-center items-center mb-3 relative overflow-hidden border border-blue-900/5">
+                        <div class="w-full h-28 md:h-36 bg-[#F9F8F6] rounded-xl flex justify-center items-center mb-3 relative overflow-hidden border border-blue-900/5">
                             <img src="${p.image}" class="max-w-[85%] max-h-[85%] object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-xl">
                         </div>
                         <div class="px-1 text-center">
                             <p class="text-[8px] md:text-[9px] font-bold text-blue-500 uppercase tracking-widest mb-1">${p.brand}</p>
-                            <h3 class="font-display font-bold text-[11px] md:text-[13px] leading-tight mb-1 truncate w-full text-blue-950">${p.name}</h3>
+                            <h3 class="font-display font-bold text-[12px] md:text-[13px] leading-tight mb-1 truncate w-full text-blue-950">${p.name}</h3>
                             <div class="text-blue-800 text-[10px] md:text-xs font-sans font-black mb-3">KSh ${p.basePrice.toLocaleString()}</div>
                         </div>
-                        <div class="w-full flex flex-col gap-1.5 mt-auto pt-2 border-t border-blue-900/5">
-                            <button onclick="event.stopPropagation(); quickAddToCart('${p.id}')" class="w-full bg-[#F9F8F6] text-blue-900 hover:bg-blue-50 font-sans font-bold py-2 rounded-lg transition-colors text-[9px] md:text-[11px] border border-blue-900/5 flex justify-center items-center gap-1.5">
+                        
+                        <div class="w-full flex flex-row gap-1.5 mt-auto pt-3 border-t border-blue-900/5">
+                            <button onclick="event.stopPropagation(); quickAddToCart('${p.id}')" class="flex-1 bg-[#F9F8F6] text-blue-900 hover:bg-blue-50 font-sans font-bold py-2.5 rounded-lg transition-colors text-[9px] md:text-[10px] border border-blue-900/5 flex justify-center items-center gap-1">
                                 🛒 Add to Bag
                             </button>
-                            <button onclick="event.stopPropagation(); quickBuyNow('${p.id}')" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-sans font-bold py-2 rounded-lg transition-colors text-[9px] md:text-[11px] shadow-sm flex justify-center items-center gap-1.5">
-                                <i class="fab fa-whatsapp text-sm"></i> Order via WhatsApp
+                            <button onclick="event.stopPropagation(); selectProduct(${index})" class="flex-1 bg-blue-50 text-blue-700 hover:bg-blue-100 font-sans font-bold py-2.5 rounded-lg transition-colors text-[9px] md:text-[10px] border border-blue-100 flex justify-center items-center gap-1">
+                                🔍 View Item
                             </button>
                         </div>
                     </div>`; 
@@ -787,7 +784,6 @@
 
         function backFromCart() { showPage('catalog'); }
 
-        // --- CART LOGIC ---
         function quickAddToCart(id) {
             const product = products.find(p => p.id === id);
             currentSelection.product = product;
@@ -820,7 +816,7 @@
                 cart.push(item); 
             }
             
-            localStorage.setItem('buycom_cart_zen_v4', JSON.stringify(cart)); 
+            localStorage.setItem('buycom_cart_zen_v5', JSON.stringify(cart)); 
             updateCartUI(); 
             showToast("Added to Bag"); 
             
@@ -837,7 +833,7 @@
             if (item.qty <= 0) {
                 cart = cart.filter(i => i.cartId !== cartId);
             }
-            localStorage.setItem('buycom_cart_zen_v4', JSON.stringify(cart)); 
+            localStorage.setItem('buycom_cart_zen_v5', JSON.stringify(cart)); 
             updateCartUI(); 
         }
 
@@ -847,24 +843,24 @@
             const hasHP = cart.some(item => item.id === 'hp830');
             if(!hasHP) {
                 const msg = document.getElementById('promo-msg');
-                msg.classList.add('hidden');
+                if(msg) msg.classList.add('hidden');
                 activePromo = false;
-                document.getElementById('promo-code-input').value = '';
+                const promoInput = document.getElementById('promo-code-input');
+                if(promoInput) promoInput.value = '';
             }
             
-            localStorage.setItem('buycom_cart_zen_v4', JSON.stringify(cart)); 
+            localStorage.setItem('buycom_cart_zen_v5', JSON.stringify(cart)); 
             updateCartUI(); 
         }
 
         function clearCart() { 
             if(confirm("Clear all items from your bag?")) { 
                 cart = []; 
-                localStorage.setItem('buycom_cart_zen_v4', JSON.stringify(cart)); 
+                localStorage.setItem('buycom_cart_zen_v5', JSON.stringify(cart)); 
                 updateCartUI(); 
             } 
         }
 
-        // --- PROMO CODE LOGIC ---
         function applyPromoCode() {
             const input = document.getElementById('promo-code-input').value.toUpperCase().trim();
             const msg = document.getElementById('promo-msg');
@@ -914,8 +910,10 @@
                     container.innerHTML = '<div class="flex flex-col items-center justify-center py-16 md:py-20 text-blue-300"><i class="fas fa-shopping-bag text-4xl md:text-5xl mb-3 md:mb-4"></i><p class="text-[11px] md:text-sm font-bold uppercase tracking-widest font-sans">Your bag is empty</p></div>'; 
                     document.getElementById('cart-total').innerText = 'KSh 0';
                     activePromo = false;
-                    document.getElementById('promo-msg').classList.add('hidden');
-                    document.getElementById('promo-code-input').value = '';
+                    const msg = document.getElementById('promo-msg');
+                    if(msg) msg.classList.add('hidden');
+                    const promoInput = document.getElementById('promo-code-input');
+                    if(promoInput) promoInput.value = '';
                 } else { 
                     cart.forEach(item => { 
                         let itemPrice = item.price;
@@ -945,13 +943,15 @@
                                     ${extraTags}
 
                                     <div class="flex items-center gap-1.5 md:gap-3 bg-[#F9F8F6] w-fit rounded-lg px-2 py-1 mt-2 border border-blue-900/5">
-                                        <button onclick="updateCartQty(${item.cartId}, -1)" class="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-minus text-[7px] md:text-[10px]"></i></button>
+                                        <button onclick="updateCartQty(${item.cartId}, -1)" class="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-minus text-[7px] md:text-[10px]"></i></button>
                                         <span class="text-[9px] md:text-xs font-bold w-3 md:w-4 text-center text-blue-900 font-sans">${item.qty}</span>
-                                        <button onclick="updateCartQty(${item.cartId}, 1)" class="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-plus text-[7px] md:text-[10px]"></i></button>
+                                        <button onclick="updateCartQty(${item.cartId}, 1)" class="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center text-blue-500 hover:text-blue-900"><i class="fas fa-plus text-[7px] md:text-[10px]"></i></button>
                                     </div>
                                 </div>
                             </div>
-                            <button onclick="removeFromCart(${item.cartId})" class="absolute top-3 right-3 text-blue-300 hover:text-red-500 transition-colors"><i class="fas fa-times text-xs"></i></button>
+                            <button onclick="removeFromCart(${item.cartId}); event.stopPropagation();" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-100 transition-colors z-20 cursor-pointer">
+                                <i class="fas fa-times text-[10px]"></i>
+                            </button>
                         </div>`; 
                     }); 
                     document.getElementById('cart-total').innerText = 'KSh ' + total.toLocaleString(); 
@@ -961,37 +961,8 @@
 
         function openCart() { showPage('cart-page'); }
 
-        // --- CHECKOUT LOGIC ---
-        function quickBuyNow(id) {
-            const p = products.find(prod => prod.id === id);
-            const defaultSize = `${p.ramOptions[0].size} | ${p.storageOptions[0].size}`;
-            let msg = '💻 *BUYCOM TECH: QUICK ORDER*\n\n';
-            msg += `*Device:* ${p.name}\n*Specs:* ${defaultSize}\n`; 
-            if (p.promo) msg += `*Promo:* 🎁 ${p.promo}\n`;
-            msg += `*Price:* KSh ${p.basePrice.toLocaleString()}`; 
-            window.open('https://wa.me/254799236373?text=' + encodeURIComponent(msg), '_blank'); 
-        }
-
-        function buyNow() { 
-            const p = currentSelection.product; 
-            let msg = '💻 *BUYCOM TECH: QUICK ORDER*\n\n';
-            msg += `*Device:* ${p.name}\n*Specs:* ${currentSelection.ram} | ${currentSelection.storage}\n`; 
-            if (p.promo) msg += `*Promo:* 🎁 ${p.promo}\n`;
-            msg += `*Price:* KSh ${currentSelection.finalPrice.toLocaleString()}`; 
-            window.open('https://wa.me/254799236373?text=' + encodeURIComponent(msg), '_blank'); 
-        }
-
         function checkoutCart() { 
             if(cart.length === 0) return showToast("Cart is empty!"); 
-
-            const locSelect = document.getElementById('delivery-location');
-            const location = locSelect.value;
-            
-            if (!location) {
-                locSelect.classList.add('border-blue-500', 'bg-blue-50');
-                setTimeout(() => locSelect.classList.remove('border-blue-500', 'bg-blue-50'), 500);
-                return showToast("Please select a delivery area!");
-            }
 
             let total = 0; 
             let msg = '💻 *BUYCOM TECH: NEW ORDER*\n\n'; 
@@ -1009,7 +980,6 @@
                 msg += `   = KSh ${(itemPrice * item.qty).toLocaleString()}\n\n`; 
             }); 
             
-            msg += `📍 *Delivery Area:* ${location}\n`;
             msg += `💰 *TOTAL TO PAY: KSh ${total.toLocaleString()}*`; 
             
             window.open('https://wa.me/254799236373?text=' + encodeURIComponent(msg), '_blank'); 
